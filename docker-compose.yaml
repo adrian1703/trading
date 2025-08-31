@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  a-trade-data-module:
+    image: localhost/a-trade-data-module:v0.1
+    container_name: a-trade-data-module
+    depends_on:
+      - kafka1
+    environment:
+      KAFKA_BROKER: kafka:9092
+#    ports:
+#      - "8000:8000"
+
+  kafka1:
+    image: confluentinc/cp-kafka:7.4.10
+    hostname: kafka1
+    container_name: kafka1
+    ports:
+      - "9092:9092"
+      - "9093:9093"  # internal port
+    environment:
+      KAFKA_KRAFT_MODE: 'true'
+      CLUSTER_ID: 'EmptNWtoR4GGWx-BH6nGLQ'
+      KAFKA_NODE_ID: 1
+      KAFKA_BROKER_ID: 1
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_LISTENERS: 'PLAINTEXT://kafka1:9092,CONTROLLER://kafka1:9093'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://kafka1:9092'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka1:9093
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+    networks:
+      - a-trade-data-network
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-cluster-ui
+    ports:
+      - "7000:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: a-data-trade-local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka1:9092
+    depends_on:
+      - kafka1
+    networks:
+        - a-trade-data-network
+
+
+volumes:
+  kafka_data:
+
+networks:
+  a-trade-data-network:
+    driver: bridge

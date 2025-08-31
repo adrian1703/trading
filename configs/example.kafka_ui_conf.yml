@@ -1,0 +1,7 @@
+kafka:
+  clusters:
+    - name: a-data-trade-local
+      bootstrapServers: kafka:9092
+      # other properties...
+  internalTopicPrefix: "_"
+  adminClientTimeout: 30
