@@ -2,12 +2,17 @@ version: '3.8'
 
 services:
   a-trade-data-module:
-    image: localhost/a-trade-data-module:v0.1
+    image: localhost/a-trade-data-module:v0.2
     container_name: a-trade-data-module
-    depends_on:
-      - kafka1
+    volumes:
+      - ./a-trade-data-module/data:/persisted_data:Z
+    env_file:
+      - ./a-trade-data-module/.env
+  #    depends_on:
+#      - kafka1
     environment:
       KAFKA_BROKER: kafka:9092
+      data_dir: /persisted_data # override from env file
 #    ports:
 #      - "8000:8000"
 
