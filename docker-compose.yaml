@@ -10,9 +10,13 @@ services:
       - ./a-trade-data-module/.env
     depends_on:
       - kafka1
+      - schema-registry
     environment:
-      KAFKA_BROKER: kafka:9092
+      KAFKA_BROKER: kafka1:9092
       data_dir: /persisted_data/ # override from env file
+      shared_resources_dir: /a-trade-data-module/a-trade-shared-resources/ # override from env file
+      schema_registry_url: http://schema-registry:8081
+      kafka_broker: kafka1:9092
     ports:
       - "7001:8080"
 
@@ -36,8 +40,23 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka1:9093
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     volumes:
       - kafka_data:/var/lib/kafka/data
+    networks:
+      - a-trade-data-network
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.4.10
+    container_name: schema-registry
+    depends_on:
+      - kafka1
+    ports:
+      - "7002:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka1:9092
     networks:
       - a-trade-data-network
 
