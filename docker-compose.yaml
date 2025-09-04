@@ -8,13 +8,13 @@ services:
       - ./a-trade-data-module/data:/persisted_data:Z
     env_file:
       - ./a-trade-data-module/.env
-  #    depends_on:
-#      - kafka1
+    depends_on:
+      - kafka1
     environment:
       KAFKA_BROKER: kafka:9092
-      data_dir: /persisted_data # override from env file
-#    ports:
-#      - "8000:8000"
+      data_dir: /persisted_data/ # override from env file
+    ports:
+      - "7001:8080"
 
   kafka1:
     image: confluentinc/cp-kafka:7.4.10
