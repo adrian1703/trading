@@ -44,10 +44,18 @@ Executes commands in all repositories:
 
 Common examples:
 ```bash
-./meta.bash git status
-./meta.bash git checkout main
+./meta.bash git status &&
+./meta.bash git checkout main &&
 ./meta.bash git pull
 ```
+
+Update all:
+```bash
+./meta.bash git submodule foreach 'git push' &&
+./meta.bash git pull &&
+./meta.bash git push
+```
+
 
 ## Common Operations
 
