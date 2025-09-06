@@ -8,3 +8,6 @@ repos:
   - name: a-trade-shared-resources
     url: git@github.com:adrian1703/a-trade-shared-resources.git
     branch: main
+  - name: a-trade-mircoservice-base
+    url: git@github.com:adrian1703/a-trade-mircoservice-base.git
+    branch: main
