@@ -9,6 +9,7 @@
     <mapping directory="$PROJECT_DIR$/a-trade-frontend/reference/toolpad" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/a-trade-mircoservice-base" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/a-trade-mircoservice-base/a-trade-microservice-template" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/a-trade-mircoservice-base/a-trade-shared-resources" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/a-trade-shared-resources" vcs="Git" />
   </component>
 </project>
