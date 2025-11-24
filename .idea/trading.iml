@@ -2,7 +2,14 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/a-trade-data-microservice-basic-aggregate-publisher" />
+      <excludeFolder url="file://$MODULE_DIR$/a-trade-data-module" />
+      <excludeFolder url="file://$MODULE_DIR$/a-trade-frontend" />
+      <excludeFolder url="file://$MODULE_DIR$/a-trade-microservice-basic-aggregate-publisher" />
+      <excludeFolder url="file://$MODULE_DIR$/a-trade-mircoservice-base" />
+      <excludeFolder url="file://$MODULE_DIR$/a-trade-shared-resources" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

@@ -1,24 +1,38 @@
 version: '3.8'
 
 services:
-  a-trade-data-module:
-    image: localhost/a-trade-data-module:v0.2
-    container_name: a-trade-data-module
+#  a-trade-data-module:
+#    image: localhost/a-trade-data-module:v0.2
+#    container_name: a-trade-data-module
+#    volumes:
+#      - ./a-trade-data-module/data:/persisted_data:Z
+#    env_file:
+#      - ./a-trade-data-module/.env
+#    depends_on:
+#      - kafka1
+#      - schema-registry
+#    environment:
+#      KAFKA_BROKER: kafka1:9092
+#      data_dir: /persisted_data/ # override from env file
+#      shared_resources_dir: /a-trade-data-module/a-trade-shared-resources/ # override from env file
+#      schema_registry_url: http://schema-registry:8081
+#      kafka_broker: kafka1:9092
+#    ports:
+#      - "6000:8080"
+#
+  a-trade-microservice-basic-aggregate-publisher:
+    image: localhost/a-trade-microservice-base:latest
+    container_name: a-trade-microservice-basic-aggregate-publisher
+    ports:
+      - "6001:8080"
     volumes:
-      - ./a-trade-data-module/data:/persisted_data:Z
-    env_file:
-      - ./a-trade-data-module/.env
+      - ./a-trade-microservice-basic-aggregate-publisher/build/libs/a-trade-microservice-basic-aggregate-publisher-0.0.1-plain.jar:/app/plugins/plugin.jar:z
+      - ./a-trade-data-module/data:/app/data:Z
     depends_on:
       - kafka1
       - schema-registry
-    environment:
-      KAFKA_BROKER: kafka1:9092
-      data_dir: /persisted_data/ # override from env file
-      shared_resources_dir: /a-trade-data-module/a-trade-shared-resources/ # override from env file
-      schema_registry_url: http://schema-registry:8081
-      kafka_broker: kafka1:9092
-    ports:
-      - "7001:8080"
+    networks:
+      - common
 
   kafka1:
     image: confluentinc/cp-kafka:7.4.10
@@ -44,7 +58,7 @@ services:
     volumes:
       - kafka_data:/var/lib/kafka/data
     networks:
-      - a-trade-data-network
+      - common
 
   schema-registry:
     image: confluentinc/cp-schema-registry:7.4.10
@@ -58,7 +72,7 @@ services:
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka1:9092
     networks:
-      - a-trade-data-network
+      - common
 
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
@@ -73,12 +87,12 @@ services:
       - kafka1
       - schema-registry
     networks:
-        - a-trade-data-network
+        - common
 
 
 volumes:
   kafka_data:
 
 networks:
-  a-trade-data-network:
+  common:
     driver: bridge
