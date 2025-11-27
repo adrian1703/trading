@@ -9,6 +9,7 @@
       <excludeFolder url="file://$MODULE_DIR$/a-trade-microservice-basic-aggregate-publisher" />
       <excludeFolder url="file://$MODULE_DIR$/a-trade-mircoservice-base" />
       <excludeFolder url="file://$MODULE_DIR$/a-trade-shared-resources" />
+      <excludeFolder url="file://$MODULE_DIR$/a-trade-microservice-base" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

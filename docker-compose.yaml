@@ -56,7 +56,7 @@ services:
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     volumes:
-      - kafka_data:/var/lib/kafka/data
+      - ./kafka_data:/var/lib/kafka/data:Z
     networks:
       - common
 
@@ -90,8 +90,6 @@ services:
         - common
 
 
-volumes:
-  kafka_data:
 
 networks:
   common:

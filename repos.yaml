@@ -8,8 +8,8 @@ repos:
   - name: a-trade-shared-resources
     url: git@github.com:adrian1703/a-trade-shared-resources.git
     branch: main
-  - name: a-trade-mircoservice-base
-    url: git@github.com:adrian1703/a-trade-mircoservice-base.git
+  - name: a-trade-microservice-base
+    url: git@github.com:adrian1703/a-trade-microservice-base.git
     branch: main
   - name: a-trade-microservice-basic-aggregate-publisher
     url: git@github.com:adrian1703/a-trade-microservice-basic-aggregate-publisher.git
