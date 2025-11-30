@@ -26,7 +26,7 @@ services:
     ports:
       - "6001:8080"
     volumes:
-      - ./a-trade-microservice-basic-aggregate-publisher/build/libs:/app/plugins:Z
+      - ./a-trade-microservice-aggregate-publisher/build/libs:/app/plugins:Z
       - ./a-trade-data-module/data:/app/data:Z
     depends_on:
       - kafka1

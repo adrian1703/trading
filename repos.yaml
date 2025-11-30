@@ -11,6 +11,6 @@ repos:
   - name: a-trade-microservice-base
     url: git@github.com:adrian1703/a-trade-microservice-base.git
     branch: main
-  - name: a-trade-microservice-basic-aggregate-publisher
-    url: git@github.com:adrian1703/a-trade-microservice-basic-aggregate-publisher.git
+  - name: a-trade-microservice-aggregate-publisher
+    url: git@github.com:adrian1703/a-trade-microservice-aggregate-publisher.git
     branch: main
