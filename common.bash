@@ -26,6 +26,7 @@ while [[ $# -gt 0 ]]; do
   case $key in
     -u|--update)
       # Common update operation
+      "$SCRIPT_DIR/meta.bash" git submodule foreach 'git pull' &&
       "$SCRIPT_DIR/meta.bash" git submodule foreach 'git push' &&
       "$SCRIPT_DIR/meta.bash" git pull &&
       "$SCRIPT_DIR/meta.bash" git push
